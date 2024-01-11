@@ -71,6 +71,17 @@ while not running:
 
     for ball in balls:
         ball.draw()
+        
+    # Check collisions and resolve them
+    for i in range(len(balls)):
+        for j in range(i + 1, len(balls)):
+            if is_colliding(balls[i], balls[j]):
+                resolve_collision(balls[i], balls[j])
+                balls[i].opacity += 0.03
+                balls[i].color = balls[i].random_rgb()
+                balls[j].opacity += 0.03
+                balls[j].color = balls[j].random_rgb()
+                count += 1
 
     pygame.display.flip()
     clock.tick(FPS)
